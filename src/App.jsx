@@ -1,0 +1,48 @@
+import { useEffect, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import Login from './page/Login'
+import Signup from './page/Signup'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './page/Home'
+import useStore from './lib/store'
+import Post from './components/Post'
+import Profile from './page/Profile'
+import ProfileUpdate from './page/ProfileUpdate'
+import { FollowLists } from './page/FollowLists'
+import FollowersLists from './page/FollowersLists'
+import Navbar from './components/Navbar'
+import Layout from './Layout'
+
+function App() {
+  const {getCurrentUser} = useStore((state) => state)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    getCurrentUser()
+  },[])
+
+  return (
+   <>
+    <BrowserRouter>
+    
+    <Routes>
+       <Route path="/" element={<Layout/>} >
+       <Route index path="/" element={<Home/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path='/post/:id' element={<Post/>} />
+        <Route path="update/profile/:id" element={<ProfileUpdate/>} />
+        <Route path="/profile/:id" element={<Profile/>} />
+        <Route path="user/follow/:id" element={<FollowLists/>} />
+        <Route path="user/followers/:id" element={<FollowersLists/>} />
+       </Route>
+       
+    </Routes>
+    </BrowserRouter>
+   </>
+  )
+}
+
+export default App

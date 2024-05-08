@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.overflow-y-auto, .overflow-y-scroll, .overflow-x-auto, .overflow-x, .overflow-x-scroll, .overflow-y, body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+  
+  .bg-dim-700 {
+    /* --bg-opacity: 1; */
+    background-color: #192734;
+  }
+  
+  html, body {
+    margin: 0;
+    /* background-color: #15202b; */
+    background-color: #0c1218;
+  }
+  
+  svg.paint-icon {
+    fill: currentcolor;
+  }
