@@ -24,24 +24,24 @@ function App() {
   },[])
 
   return (
-   <>
+   <div className='bg-[#0c1218]'>
     <BrowserRouter>
     
     <Routes>
        <Route path="/" element={<Layout/>} >
        <Route index path="/" element={<Home/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path='/post/:id' element={<Post/>} />
         <Route path="update/profile/:id" element={<ProfileUpdate/>} />
         <Route path="/profile/:id" element={<Profile/>} />
         <Route path="user/follow/:id" element={<FollowLists/>} />
         <Route path="user/followers/:id" element={<FollowersLists/>} />
        </Route>
+       <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
        
     </Routes>
     </BrowserRouter>
-   </>
+   </div>
   )
 }
 

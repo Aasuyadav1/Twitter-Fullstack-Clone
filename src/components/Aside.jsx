@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Aside = () => {
   return (
-    <aside className="w-2/5 h-12 position-relative asid md:block hidden">
+    <aside className="w-2/5 h-12 position-relative md:block hidden">
     {/*Aside menu (right side)*/}
     <div style={{ maxWidth: 350 }}>
       <div className="overflow-y-auto fixed  h-screen">

@@ -46,11 +46,13 @@ const Twittercard = ({ post }) => {
 
       if (response.ok) {
         getAllPosts();
+        toast.success(data.message);
       } else {
-        toast.error(data.message);
+        toast.error("Something went wrong");
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -94,11 +96,10 @@ const Twittercard = ({ post }) => {
 
       if (response.ok) {
         setUser(data.user);
-      } else {
-        console.log("error");
-      }
+      } 
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -186,33 +187,34 @@ const Twittercard = ({ post }) => {
       ? console.log(initialState.allPosts)
       : console.log("no posts");
   }, []);
+  
   return (
     <>
-      {post && (
+      {post && 
         <article className="hover:bg-gray-800 transition duration-350  ease-in-out ">
           <div className="flex flex-shrink-0 p-4 pb-0">
             <div className="flex-shrink-0 group block w-full">
               <div className="flex items-center ">
                 <div>
                   <img
-                    onClick={() => navigate(`/profile/${post.createdBy._id}`)}
+                    onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
                     className="inline-block h-10 w-10 rounded-full object-cover"
-                    src={post.createdBy.avatar}
+                    src={post?.createdBy?.avatar}
                     alt=""
                   />
                 </div>
                 <div className="ml-3 flex justify-between items-center w-full ">
                   <p className="text-base leading-6 font-medium text-white w-fit">
-                    {post.createdBy.name}
+                    {post?.createdBy?.name}
                     <span
-                      onClick={() => navigate(`/profile/${post.createdBy._id}`)}
+                      onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
                       className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150 pl-2 w-fit"
                     >
-                      @{post.createdBy.username} .{" "}
-                      {formatedDate(post.createdAt)}
+                      @{post?.createdBy?.username} .{" "}
+                      {formatedDate(post?.createdAt)}
                     </span>
                   </p>
-                  {location.pathname !== '/' && initialState.userData._id === post.createdBy._id ? (
+                  {location.pathname !== '/' && initialState?.userData?._id === post?.createdBy?._id ? (
               <div className="relative">
                 <FiMoreVertical
                   onClick={() =>
@@ -221,13 +223,13 @@ const Twittercard = ({ post }) => {
                   role="button"
                   className="text-md  cursor-pointer  text-white"
                 />
-                {dropdowns[post._id] && (
+                {dropdowns[post?._id] && (
                   <ul className="menu bg-base-200 w-56 rounded-box absolute top-6 right-0">
                     <li>
-                      <p onClick={() => handleEdit(post._id)}>Edit</p>
+                      <p onClick={() => handleEdit(post?._id)}>Edit</p>
                     </li>
                     <li>
-                      <p onClick={() => handleDelete(post._id)}>
+                      <p onClick={() => handleDelete(post?._id)}>
                         Delete
                       </p>
                     </li>
@@ -237,19 +239,19 @@ const Twittercard = ({ post }) => {
             ) : null}
             { location.pathname !== '/' && initialState?.userData?._id !== post?.createdBy?._id && (
               <button
-                onClick={() => followUser(post.createdBy._id)}
+                onClick={() => followUser(post?.createdBy?._id)}
                 className={`rounded-full px-4 text-sm py-1  text-black border border-solid border-white ${
-                  initialState.userData &&
-                  initialState.userData.following.includes(
-                    post.createdBy._id
+                  initialState?.userData &&
+                  initialState?.userData?.following.includes(
+                    post?.createdBy?._id
                   )
                     ? "bg-transparent hover:bg-transparent  text-white "
                     : "bg-white hover:bg-transparent border-transparent  hover:text-white"
                 }`}
               >
-                {initialState.userData &&
-                initialState.userData.following.includes(
-                  post.createdBy._id
+                {initialState?.userData &&
+                initialState?.userData?.following?.includes(
+                  post?.createdBy?._id
                 )
                   ? "Unfollow"
                   : "Follow"}
@@ -262,17 +264,17 @@ const Twittercard = ({ post }) => {
 
           <div className="pl-16">
             <p className="text-base width-auto font-medium text-white w-full flex-shrink">
-              {post.content}
+              {post?.content}
             </p>
 
             <div className="md:flex-shrink pr-6 pt-3">
               <div
-                onClick={() => navigate(`/post/${post._id}`)}
+                onClick={() => navigate(`/post/${post?._id}`)}
                 className="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64 overflow-hidden"
               >
                 <img
                   className="object-cover w-full h-full"
-                  src={post.postPhoto}
+                  src={post?.postPhoto}
                   alt=""
                 />
               </div>
@@ -280,7 +282,7 @@ const Twittercard = ({ post }) => {
 
             <div className="flex items-center py-4">
               <div
-                onClick={() => navigate(`/post/${post._id}`)}
+                onClick={() => navigate(`/post/${post?._id}`)}
                 className="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
               >
                 <svg
@@ -309,7 +311,7 @@ const Twittercard = ({ post }) => {
               <div
                 onClick={() => likePost(post._id)}
                 className={`flex-1 flex items-center ${
-                  post && post.Likes.includes(initialState.userid)
+                  post && post?.Likes?.includes(initialState?.userid)
                     ? "text-red-500"
                     : "text-white"
                 } hover:text-red-600 transition duration-350 ease-in-out cursor-pointer `}
@@ -347,7 +349,8 @@ const Twittercard = ({ post }) => {
       />
           <hr className="border-gray-800" />
         </article>
-      )}
+  
+    }
     </>
   );
 };

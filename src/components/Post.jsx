@@ -39,62 +39,6 @@ const Post = () => {
     }
   };
 
-  const formatedDate = (date) => {
-    const newDate = new Date(date);
-    return newDate.toDateString();
-  };
-
-  const likePost = async (id) => {
-    try {
-      const response = await fetch(
-        `${B_URL}/like/post/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        getPost(id);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const followUser = async (id) => {
-    try {
-      const response = await fetch(
-        `${B_URL}/follow/user/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${initialState.token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
-        getPost(id);
-        console.log("afterfolloe", data);
-        setInitialState("userData", data.user);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleComment = async () => {
     try {
       const response = await fetch(
@@ -160,13 +104,14 @@ const Post = () => {
 
   return (
     <>
-      {Array.isArray(posts) &&
+      {Array.isArray(posts) ? (
         posts.map((post, i) => (
           <div
             key={post._id}
             
           >
              <Twittercard post={post} key={post._id} />
+
             <div className="bg-white dark:bg-transparent dark:border-gray-800  w-full">       
 
               <div className="mt-4 p-4 ">
@@ -199,28 +144,28 @@ const Post = () => {
                         <div>
                           <img
                             className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
-                            src={comment.createdBy.avatar}
+                            src={comment?.createdBy?.avatar}
                             alt=""
-                            onClick={() => navigate(`/profile/${comment.createdBy._id}`)}
+                            onClick={() => navigate(`/profile/${comment?.createdBy?._id}`)}
                           />
                         </div>
                         <div className="w-full">
                           <div className="flex gap-1 justify-between w-full">
                             <div>
                               <p className="text-lg font-semibold">
-                                {comment.createdBy.name}
+                                {comment?.createdBy?.name}
                               </p>
                               <p className="text-sm text-white opacity-90">
-                                @{comment.createdBy.username}
+                                @{comment?.createdBy?.username}
                               </p>
                             </div>
                            {
-                            comment.createdBy._id === initialState.userid && (
+                            comment?.createdBy?._id === initialState?.userid && (
                               <FiMoreVertical className="text-lg cursor-pointer" />
                             )
                            }
                           </div>
-                          <p className="text-md">{comment.content}</p>
+                          <p className="text-md">{comment?.content}</p>
                         </div>
                       </div>
                       <hr className="border-gray-800 mt-4" />
@@ -229,7 +174,14 @@ const Post = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div class="animate-pulse flex space-x-4 p-4 w-full  h-[550px] ">
+    
+        <div className="w-full bg-slate-800"></div>
+        
+  </div>
+      )} 
     </>
   );
 };

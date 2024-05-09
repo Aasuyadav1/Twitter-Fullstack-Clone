@@ -18,8 +18,14 @@
   html, body {
     margin: 0;
     /* background-color: #15202b; */
-    background-color: #0c1218;
+    background-color: #0c1218 !important;
   }
+
+  #root {
+    background-color: #0c1218 !important;
+    
+  }
+  
   
   svg.paint-icon {
     fill: currentcolor;

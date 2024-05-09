@@ -29,11 +29,15 @@
         })
 
         const data = await response.json();
+
+        
        
-        console.log("dtat",data)
+        console.log("data",data)
         console.log("response",response)
         if(response.ok){
+          console.log("post created successfully")
           toast.success(data.message);
+
           await setformData({
             postPhoto : null,
             content : ""
@@ -41,9 +45,11 @@
           getAllPosts();
         }else{
           toast.error(data.message);
+          console.log("something went wrong")
         }
       } catch (error) {
         console.log(error)
+        toast.error(error.message)
       }
     }
 

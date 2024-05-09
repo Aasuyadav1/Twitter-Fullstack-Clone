@@ -57,24 +57,24 @@ const ProfileCard = ({user,fetchUser}) => {
                     </div>
                     {/* Follow Button */}
                     <div className="flex flex-col text-right">
-                    {user && user._id !== initialState.userid ? (
+                    {user && user?._id !== initialState?.userid ? (
                 <button
-                onClick={() => followUser(user._id)}
+                onClick={() => followUser(user?._id)}
                   className={`rounded-full px-4 text-sm py-1  text-black border border-solid border-white ${
-                    initialState.userData &&
-                    initialState.userData.following.includes(user._id)
+                    initialState?.userData &&
+                    initialState?.userData?.following?.includes(user._id)
                       ? "bg-transparent hover:bg-transparent  text-white "
                       : "bg-white hover:bg-transparent border-transparent  hover:text-white"
                   }`}
                 >
-                  {initialState.userData &&
-                  initialState.userData.following.includes(user._id)
+                  {initialState?.userData &&
+                  initialState?.userData?.following?.includes(user._id)
                     ? "Unfollow"
                     : "Follow"}
                 </button>
               ) : (
                 <button onClick={() =>
-                    navigate(`/update/profile/${initialState.userid}`)
+                    navigate(`/update/profile/${initialState?.userid}`)
                   } className="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 hover:border-blue-800 flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
                             Edit Profile
                         </button>

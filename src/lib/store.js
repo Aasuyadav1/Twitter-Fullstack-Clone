@@ -1,5 +1,6 @@
 
 import {create} from 'zustand'
+import {toast} from 'sonner'
 
 const useStore = create((set, get)=>({
     initialState : {
@@ -50,9 +51,11 @@ const useStore = create((set, get)=>({
                 // setInitialState("token", null)
                 // setInitialState("userData", null)
                 console.log("user fatching failed")
+                toast.error("Something went wrong")
             }
         } catch (error) {
             console.log(error)
+            toast.error(error.message)
 
         }
     },

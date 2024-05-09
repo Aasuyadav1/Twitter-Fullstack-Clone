@@ -2,24 +2,19 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Aside from './components/Aside'
-import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 const Layout = () => {
-  const location = useLocation()
-
-  // Check if the current path is not "/login" AND not "/signup"
-  const showNavbarAndAside = location.pathname !== "/login" && location.pathname !== "/signup"
 
   return (
     <>
-      <div className="p-relative">
+      <div className="p-relative bg-[#0c1218]">
         <div className="flex justify-center">
-          {showNavbarAndAside && <Navbar />}
+          <Navbar />
           <main>
             <div className="flex md:w-[990px] w-full">
               <section className="border border-y-0 border-gray-800 max-w-[600px] w-full">
-                {showNavbarAndAside && <div className="flex">
+                 <div className="flex">
                   <div className="flex-1 mx-2">
                     <h2 className="px-4 py-2 text-xl font-semibold text-white">Home</h2>
                   </div>
@@ -35,10 +30,10 @@ const Layout = () => {
                       </svg>
                     </Link>
                   </div>
-                </div>}
+                </div>
                 <Outlet />
               </section>
-              {showNavbarAndAside && <Aside />}
+              <Aside />
             </div>
           </main>
         </div>

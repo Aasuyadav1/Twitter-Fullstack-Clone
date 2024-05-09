@@ -29,7 +29,7 @@ export const FollowLists = () => {
                 console.log("error");
             }
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
