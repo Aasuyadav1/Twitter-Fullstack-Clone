@@ -10,11 +10,17 @@
       postPhoto : null,
       content : ""
     })
+    const [loader, setLoader] = useState(false);
 
     const handleSubmit = async (e) => {
+      
       e.preventDefault();
+      if(!initialState?.userData?._id){
+        return toast.error("Please login to post")
+     }
       if(!formData.postPhoto || !formData.content) return toast.error("All fields are required");
       try {
+        setLoader(true)
         console.log("file from frontend ", formData.postPhoto)
         const formDataToSend = new FormData();
         formDataToSend.append('file', formData.postPhoto);
@@ -35,6 +41,7 @@
         console.log("data",data)
         console.log("response",response)
         if(response.ok){
+          setLoader(false)
           console.log("post created successfully")
           toast.success(data.message);
 
@@ -46,10 +53,12 @@
         }else{
           toast.error(data.message);
           console.log("something went wrong")
+          setLoader(false)
         }
       } catch (error) {
         console.log(error)
         toast.error(error.message)
+        setLoader(false)
       }
     }
 
@@ -68,7 +77,7 @@
           <CiImageOn  className='text-yellow-500 text-xl'/>
           </label>
               <input name="file"  onChange={(e) => setformData({ ...formData, postPhoto : e.target.files[0]})} type="file"  id="image" className='file-input hidden file-input-bordered w-full max-w-xs' />
-              <button type='submit' className='bg-blue-500 rounded-full px-4 py-1 text-white'>Post</button>
+              <button type='submit' className='bg-blue-500 rounded-full px-4 py-1 text-white'>{loader ? "Posting..." : "Post"}</button>
           </div>
         </form>
       </div>
