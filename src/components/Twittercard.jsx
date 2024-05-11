@@ -195,10 +195,10 @@ const Twittercard = ({ post }) => {
           <div className="flex flex-shrink-0 p-4 pb-0">
             <div className="flex-shrink-0 group block w-full">
               <div className="flex items-center ">
-                <div>
+                <div className="h-10 w-10">
                   <img
                     onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
-                    className="inline-block h-10 w-10 rounded-full object-cover"
+                    className="className='object-cover rounded-full w-[40px] aspect-square"
                     src={post?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
                     alt=""
                   />
@@ -224,7 +224,7 @@ const Twittercard = ({ post }) => {
                   className="text-md  cursor-pointer  text-white"
                 />
                 {dropdowns[post?._id] && (
-                  <ul className="menu bg-base-200 w-56 rounded-box absolute top-6 right-0">
+                  <ul className="menu bg-base-200 w-56 rounded-box absolute top-6 right-0 ">
                     <li>
                       <p onClick={() => handleEdit(post?._id)}>Edit</p>
                     </li>

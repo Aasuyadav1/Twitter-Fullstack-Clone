@@ -104,7 +104,7 @@ const Post = () => {
           <div key={post._id}>
             <Twittercard post={post} key={post._id} />
 
-            <div className="bg-white dark:bg-transparent dark:border-gray-800  w-full">
+            <div className="bg-transparent border-gray-800  w-full">
               <div className="mt-4 p-4 ">
                 <div className="flex gap-1 items-center">
                   <img

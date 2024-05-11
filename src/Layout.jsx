@@ -25,7 +25,7 @@ const Layout = () => {
                   <div className="mx-2">
                   {
                 initialState?.userData && initialState?.userData?._id ? (
-                    <Link to={`/profile/${initialState.userData._id}`}  class="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:text-blue-300">
+                    <Link to={`/profile/${initialState.userData._id}`}  class="group flex items-center px-2 py-2 text-base leading-6 font-semibold text-white rounded-full hover:text-blue-300">
                 <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
