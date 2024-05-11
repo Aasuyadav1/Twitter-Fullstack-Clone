@@ -42,7 +42,7 @@ const ProfileCard = ({user,fetchUser}) => {
     return (
         <div>
             <div className=" bg-cover bg-no-repeat bg-center max-w-[600px] w-full" style={{ height: '200px', backgroundImage: `url(${user?.coverimage})`  }}>
-                <img className="opacity-0 w-full h-full" src={user?.coverimage || "https://tokystorage.s3.amazonaws.com/images/default-cover.png"} alt="cover image upload" />
+                <img className=" w-full h-full" src={user?.coverimage ||"https://tokystorage.s3.amazonaws.com/images/default-cover.png"} alt="cover image upload" />
             </div>
             <div className="p-4">
                 <div className="relative flex w-full">
