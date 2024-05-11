@@ -77,7 +77,7 @@ const Card = () => {
        initialState?.allPosts ? ( initialState?.allPosts?.map((post) => (
          <Twittercard post={post} key={post._id} />
        ))) : (
-        <div class="animate-pulse flex space-x-4 p-4 w-full  h-[550px] ">
+        <div class="animate-pulse flex space-x-4 p-4 max-w-[600px] w-full  h-[550px] ">
           <div className="w-full bg-slate-800"></div>
         </div>
        )

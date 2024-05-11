@@ -42,7 +42,7 @@ const ProfileCard = ({user,fetchUser}) => {
     return (
         <div>
             <div className=" bg-cover bg-no-repeat bg-center max-w-[600px] w-full" style={{ height: '200px', backgroundImage: `url(${user?.coverimage})`  }}>
-                <img className="opacity-0 w-full h-full" src={user?.coverimage} alt="" />
+                <img className="opacity-0 w-full h-full" src={user?.coverimage || "https://tokystorage.s3.amazonaws.com/images/default-cover.png"} alt="" />
             </div>
             <div className="p-4">
                 <div className="relative flex w-full">
@@ -50,7 +50,7 @@ const ProfileCard = ({user,fetchUser}) => {
                     <div className="flex flex-1">
                         <div style={{ marginTop: '-6rem' }}>
                             <div style={{ height: '9rem', width: '9rem' }} className="md rounded-full relative avatar">
-                                <img style={{ height: '9rem', width: '9rem' }} className="md rounded-full relative border-4 border-gray-900" src={user?.avatar} alt="" />
+                                <img style={{ height: '9rem', width: '9rem' }} className="md rounded-full relative border-4 border-gray-900" src={user?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"} alt="" />
                                 <div className="absolute"></div>
                             </div>
                         </div>

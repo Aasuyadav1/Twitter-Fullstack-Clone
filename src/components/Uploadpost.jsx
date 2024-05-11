@@ -69,7 +69,7 @@
       <div className='px-4 py-2 w-full  border border-gray-800 border-solid'>
         <form onSubmit={handleSubmit} method='POST' encType='multipart/form-data'>
         <div className='flex items-start gap-2'>
-              <img src={initialState?.userData?.avatar} className='object-cover rounded-full w-[40px] aspect-square' alt="" />
+              <img src={initialState?.userData?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"} className='object-cover rounded-full w-[40px] aspect-square' alt="" />
               <textarea onChange={(e) => setformData({ ...formData, content : e.target.value})} name="" id="" cols="30" rows="2" value={formData.content} placeholder='What is happening'  className=' outline-none w-full p-3 resize-none bg-transparent text-white rounded-xl'></textarea>
           </div>
           <div className='flex items-center justify-between'>

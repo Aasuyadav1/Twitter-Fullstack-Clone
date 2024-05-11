@@ -199,7 +199,7 @@ const Twittercard = ({ post }) => {
                   <img
                     onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
                     className="inline-block h-10 w-10 rounded-full object-cover"
-                    src={post?.createdBy?.avatar}
+                    src={post?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
                     alt=""
                   />
                 </div>
@@ -349,7 +349,6 @@ const Twittercard = ({ post }) => {
       />
           <hr className="border-gray-800" />
         </article>
-  
     }
     </>
   );

@@ -110,7 +110,7 @@ const ProfileUpdate = () => {
             <div className='relative'>
               <img
                 className="h-[200px] w-full object-cover"
-                src={formData.coverImage instanceof File ? URL.createObjectURL(formData.coverImage) : formData.coverImage || "https://pbs.twimg.com/profile_banners/191167764/1708623277/1080x360"}
+                src={formData.coverImage instanceof File ? URL.createObjectURL(formData.coverImage) : formData.coverImage || "https://tokystorage.s3.amazonaws.com/images/default-cover.png"}
                 alt=""
               />
               {/* Input for cover image */}
@@ -122,7 +122,7 @@ const ProfileUpdate = () => {
             <div className="relative ">
               <img
                 className="h-[150px] w-[150px] object-cover rounded-full absolute -top-24 left-6"
-                src={formData.avatar instanceof File ? URL.createObjectURL(formData.avatar) : formData.avatar || "https://plus.unsplash.com/premium_photo-1714229505922-0ab8148bc2bf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8"}
+                src={formData.avatar instanceof File ? URL.createObjectURL(formData.avatar) : formData.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
                 alt=""
               />
               {/* Input for avatar */}

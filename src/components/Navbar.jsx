@@ -71,12 +71,17 @@ const Navbar = () => {
             </Link>
                 ) : null
             }
-            <Link  class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
-                <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+            {
+                !initialState?.userData && (
+                    <Link to={"/login"}  class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
+                             <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                More
-            </Link>
+                        Login
+                    </Link>
+                )
+            }
+
 
             {/* <button class="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
                 Tweet
@@ -91,7 +96,7 @@ const Navbar = () => {
                             <Link to={`/profile/${initialState.userData._id}`} className="flex-shrink-0 group block">
                                 <div className="flex items-center">
                                     <div>
-                                        <img className="inline-block h-10 w-10 rounded-full" src={initialState?.userData?.avatar} alt="" />
+                                        <img className="inline-block h-10 w-10 rounded-full" src={initialState?.userData?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"} alt="" />
                                     </div>
                                     <div className="ml-3">
                                         <p className="text-base leading-6 font-medium text-white">

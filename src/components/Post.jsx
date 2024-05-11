@@ -16,7 +16,8 @@ const Post = () => {
     (state) => state
   );
   
-  const B_URL = process.env.BACKEND_URL
+
+  const B_URL = process.env.BACKEND_URL;
 
   const getPost = async (id) => {
     try {
@@ -41,17 +42,14 @@ const Post = () => {
 
   const handleComment = async () => {
     try {
-      const response = await fetch(
-        `${B_URL}/create/comment/post/${id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${initialState.token}`,
-          },
-          body: JSON.stringify({ content: commentForm }),
-        }
-      );
+      const response = await fetch(`${B_URL}/create/comment/post/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${initialState.token}`,
+        },
+        body: JSON.stringify({ content: commentForm }),
+      });
 
       const data = await response.json();
 
@@ -69,16 +67,13 @@ const Post = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(
-        `${B_URL}/get/comments/post/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${initialState.token}`,
-          },
-        }
-      );
+      const response = await fetch(`${B_URL}/get/comments/post/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${initialState.token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -106,19 +101,15 @@ const Post = () => {
     <>
       {Array.isArray(posts) ? (
         posts.map((post, i) => (
-          <div
-            key={post._id}
-            
-          >
-             <Twittercard post={post} key={post._id} />
+          <div key={post._id}>
+            <Twittercard post={post} key={post._id} />
 
-            <div className="bg-white dark:bg-transparent dark:border-gray-800  w-full">       
-
+            <div className="bg-white dark:bg-transparent dark:border-gray-800  w-full">
               <div className="mt-4 p-4 ">
                 <div className="flex gap-1 items-center">
                   <img
                     className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
-                    src={initialState?.userData?.avatar}
+                    src={initialState?.userData?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
                     alt=""
                   />
                   <input
@@ -146,7 +137,9 @@ const Post = () => {
                             className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
                             src={comment?.createdBy?.avatar}
                             alt=""
-                            onClick={() => navigate(`/profile/${comment?.createdBy?._id}`)}
+                            onClick={() =>
+                              navigate(`/profile/${comment?.createdBy?._id}`)
+                            }
                           />
                         </div>
                         <div className="w-full">
@@ -159,11 +152,10 @@ const Post = () => {
                                 @{comment?.createdBy?.username}
                               </p>
                             </div>
-                           {
-                            comment?.createdBy?._id === initialState?.userid && (
+                            {comment?.createdBy?._id ===
+                              initialState?.userid && (
                               <FiMoreVertical className="text-lg cursor-pointer" />
-                            )
-                           }
+                            )}
                           </div>
                           <p className="text-md">{comment?.content}</p>
                         </div>
@@ -176,12 +168,10 @@ const Post = () => {
           </div>
         ))
       ) : (
-        <div class="animate-pulse flex space-x-4 p-4 w-full  h-[550px] ">
-    
-        <div className="w-full bg-slate-800"></div>
-        
-  </div>
-      )} 
+        <div class="animate-pulse flex space-x-4 p-4 max-w-[600px] w-full  h-[550px] ">
+          <div className="w-full bg-slate-800"></div>
+        </div>
+      )}
     </>
   );
 };
