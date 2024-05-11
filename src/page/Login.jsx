@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (initialState.userData._id) {
+    if (initialState?.userData?._id) {
       navigate("/");
     }
   },[])

@@ -11,7 +11,7 @@ const Home = () => {
   const {initialState} = useStore((state) => state)
   const navigate = useNavigate();
   useEffect(() => {
-    if(!initialState.userData._id){
+    if(!initialState?.userData?._id){
       navigate('/login')
     }
   },[])
