@@ -44,7 +44,9 @@ const Follow = ({ list, updateUserFollowList }) => {
              <div>
                <img
                  className="inline-block cursor-pointer h-10 w-10 rounded-full ml-4 mt-2"
-                 src={list.avatar}
+                 src={list.avatar || 
+                  "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                 }
                  alt=""
                  onClick={() => navigate(`/profile/${list._id}`)}
                />
