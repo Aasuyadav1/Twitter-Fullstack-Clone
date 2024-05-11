@@ -11,7 +11,7 @@ const Home = () => {
   const {initialState} = useStore((state) => state)
   const navigate = useNavigate();
   useEffect(() => {
-    if(!initialState?.isLoggedIn){
+    if(!initialState.token){
       navigate('/login')
     }
   },[])
