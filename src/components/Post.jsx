@@ -135,7 +135,7 @@ const Post = () => {
                         <div>
                           <img
                             className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
-                            src={comment?.createdBy?.avatar}
+                            src={comment?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
                             alt=""
                             onClick={() =>
                               navigate(`/profile/${comment?.createdBy?._id}`)

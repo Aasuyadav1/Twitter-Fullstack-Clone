@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import useStore from "../lib/store";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const { initialState, setInitialState } = useStore((state) => state);
 
   const B_URL = process.env.BACKEND_URL
 
@@ -56,7 +58,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (initialState.token) {
       navigate("/");
     }
   },[])
