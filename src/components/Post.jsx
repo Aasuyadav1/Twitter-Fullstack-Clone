@@ -16,7 +16,7 @@ const Post = () => {
 
   const B_URL = process.env.BACKEND_URL;
 
-  const getPost = async (id) => {
+  const getPost = async () => {
     try {
       const response = await fetch(`${B_URL}/post/${id}`, {
         method: "GET",
@@ -30,7 +30,7 @@ const Post = () => {
 
       if (response.ok) {
         setPosts([data.post]);
-        getPost(id);
+        
       }
     } catch (error) {
       console.log(error);
@@ -88,7 +88,7 @@ const Post = () => {
 
   useEffect(() => {
     const getdatas = async () => {
-      await getPost(id);
+      await getPost();
       await fetchComments();
     };
     getdatas();
