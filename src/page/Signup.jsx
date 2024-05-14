@@ -39,10 +39,10 @@ const Signup = () => {
             const data = await response.json();
 
             if(response.ok){
-                navigate("/home")
                 toast.success("logged in successfully")
                 localStorage.setItem("token", data.token)
                 await getCurrentUser()
+                navigate("/home")
                 setFormData({
                     name : "",
                     username : "",

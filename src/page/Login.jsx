@@ -39,10 +39,10 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
       if (response.ok) {
-        navigate("/home");
         toast.success(data.message);
         localStorage.setItem("token", data.token);
         await getCurrentUser();
+        navigate("/home");
         setFormData({
           email: "",
           password: "",
