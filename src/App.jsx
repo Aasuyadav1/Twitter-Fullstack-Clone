@@ -29,7 +29,7 @@ function App() {
     
     <Routes>
        <Route path="/" element={<Layout/>} >
-       <Route index  path="/home" element={<Home/>} />
+       <Route   path="/home" element={<Home/>} />
         <Route path='/post/:id' element={<Post/>} />
         <Route path="update/profile/:id" element={<ProfileUpdate/>} />
         <Route path="/profile/:id" element={<Profile/>} />
@@ -37,7 +37,7 @@ function App() {
         <Route path="user/followers/:id" element={<FollowersLists/>} />
        </Route>
          <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<Login />} />
+          <Route index path="/" element={<Login />} />
     </Routes>
     </BrowserRouter>
    </div>
