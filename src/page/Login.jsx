@@ -40,9 +40,8 @@ const Login = () => {
       console.log(data);
       if (response.ok) {
         toast.success(data.message);
-        await localStorage.setItem("token", data.token);
-        await setInitialState("token", data.token);
-        await getCurrentUser();
+        localStorage.setItem("token", data.token);
+        await setInitialState("isLoggedIn", true);
         navigate("/home");
         setFormData({
           email: "",
@@ -57,12 +56,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (initialState?.token) {
+    if (initialState?.isLoggedIn) {
       navigate("/home");
     } else {
       navigate("/");
     }
-  }, [initialState?.token]);
+  }, [initialState?.isLoggedIn]);
   return (
     <section class=" w-screen bg-[#0c1218]">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
