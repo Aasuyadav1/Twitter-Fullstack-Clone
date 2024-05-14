@@ -12,10 +12,7 @@ const Post = () => {
   const [posts, setPosts] = useState(null);
   const [commentForm, setCommentForm] = useState("");
   const [comments, setComments] = useState([]);
-  const { getAllPosts, initialState, setInitialState } = useStore(
-    (state) => state
-  );
-  
+  const { initialState } = useStore((state) => state);
 
   const B_URL = process.env.BACKEND_URL;
 
@@ -109,7 +106,10 @@ const Post = () => {
                 <div className="flex gap-1 items-center">
                   <img
                     className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
-                    src={initialState?.userData?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+                    src={
+                      initialState?.userData?.avatar ||
+                      "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                    }
                     alt=""
                   />
                   <input
@@ -135,7 +135,10 @@ const Post = () => {
                         <div>
                           <img
                             className="object-cover rounded-full w-[35px] h-[35px] aspect-square"
-                            src={comment?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+                            src={
+                              comment?.createdBy?.avatar ||
+                              "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                            }
                             alt=""
                             onClick={() =>
                               navigate(`/profile/${comment?.createdBy?._id}`)

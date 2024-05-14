@@ -88,64 +88,6 @@ const Profile = () => {
     }
   };
 
-  const formatedDate = (date) => {
-    const newDate = new Date(date);
-    return newDate.toDateString();
-  };
-
-  const likePost = async (postId) => {
-    try {
-      const response = await fetch(`${B_URL}/like/post/${postId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${initialState.token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        fetchUserPosts();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleEdit = (id) => {
-    setDropdowns({ [id]: true }); // Open the clicked dropdown and close others
-    setShowModal(true);
-    setPostId(id);
-  };
-
-  const handleDelete = (id) => {
-    const deleteconfirm = confirm("Are you sure? You want to delete this post");
-    console.log(deleteconfirm);
-    if (deleteconfirm) {
-      console.log(id);
-      const response = fetch(`${B_URL}/delete/post/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${initialState.token}`,
-        },
-      });
-
-      if (response.ok) {
-        fetchUserPosts();
-        getAllPosts();
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } else {
-      console.log("cancel");
-    }
-  };
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -168,15 +110,13 @@ const Profile = () => {
   return (
     <div className=" flex items-center mt-4 justify-center ">
       <div className=" max-w-[600px] w-full">
-        {
-          user ? (
-            <ProfileCard user={user} fetchUser={fetchUser} />
-          ) : (
-            <div class="animate-pulse flex space-x-4 p-4 w-full  h-[400px] ">
+        {user ? (
+          <ProfileCard user={user} fetchUser={fetchUser} />
+        ) : (
+          <div class="animate-pulse flex space-x-4 p-4 w-full  h-[400px] ">
             <div className="w-full bg-slate-800"></div>
           </div>
-          )
-        }
+        )}
         {userPost.length > 0 ? (
           userPost.map((post) => <Twittercard post={post} key={post._id} />)
         ) : (

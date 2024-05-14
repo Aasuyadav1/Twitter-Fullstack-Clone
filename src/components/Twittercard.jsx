@@ -22,7 +22,7 @@ const Twittercard = ({ post }) => {
   );
   const [showModal, setShowModal] = useState(false);
 
-  const B_URL = process.env.BACKEND_URL
+  const B_URL = process.env.BACKEND_URL;
 
   const formatedDate = (date) => {
     const newDate = new Date(date);
@@ -31,16 +31,13 @@ const Twittercard = ({ post }) => {
 
   const likePost = async (id) => {
     try {
-      const response = await fetch(
-        `${B_URL}/like/post/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${B_URL}/like/post/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -58,16 +55,13 @@ const Twittercard = ({ post }) => {
 
   const followUser = async (id) => {
     try {
-      const response = await fetch(
-        `${B_URL}/follow/user/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${initialState.token}`,
-          },
-        }
-      );
+      const response = await fetch(`${B_URL}/follow/user/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${initialState.token}`,
+        },
+      });
       const data = await response.json();
       if (response.ok) {
         getAllPosts();
@@ -96,7 +90,7 @@ const Twittercard = ({ post }) => {
 
       if (response.ok) {
         setUser(data.user);
-      } 
+      }
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -105,15 +99,12 @@ const Twittercard = ({ post }) => {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch(
-        `${B_URL}/post/user/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${B_URL}/post/user/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const data = await response.json();
 
@@ -148,8 +139,8 @@ const Twittercard = ({ post }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${initialState.token}`,
         },
-      })
-    
+      });
+
       if (response.ok) {
         fetchUserPosts();
         getAllPosts();
@@ -157,8 +148,8 @@ const Twittercard = ({ post }) => {
       } else {
         toast.error(data.message);
       }
-    }else{
-      console.log("cancel")
+    } else {
+      console.log("cancel");
     }
   };
 
@@ -179,7 +170,7 @@ const Twittercard = ({ post }) => {
 
   useEffect(() => {
     console.log("path", location.pathname);
-  },[location.pathname]);
+  }, [location.pathname]);
 
   useEffect(() => {
     getAllPosts();
@@ -187,10 +178,10 @@ const Twittercard = ({ post }) => {
       ? console.log(initialState.allPosts)
       : console.log("no posts");
   }, []);
-  
+
   return (
     <>
-      {post && 
+      {post && (
         <article className="hover:bg-gray-800 transition duration-350  ease-in-out ">
           <div className="flex flex-shrink-0 p-4 pb-0">
             <div className="flex-shrink-0 group block w-full">
@@ -199,7 +190,10 @@ const Twittercard = ({ post }) => {
                   <img
                     onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
                     className="className='object-cover rounded-full w-[40px] aspect-square"
-                    src={post?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+                    src={
+                      post?.createdBy?.avatar ||
+                      "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+                    }
                     alt=""
                   />
                 </div>
@@ -207,56 +201,60 @@ const Twittercard = ({ post }) => {
                   <p className="text-base leading-6 font-medium text-white w-fit">
                     {post?.createdBy?.name}
                     <span
-                      onClick={() => navigate(`/profile/${post?.createdBy?._id}`)}
+                      onClick={() =>
+                        navigate(`/profile/${post?.createdBy?._id}`)
+                      }
                       className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150 pl-2 w-fit"
                     >
                       @{post?.createdBy?.username} .{" "}
                       {formatedDate(post?.createdAt)}
                     </span>
                   </p>
-                  {location.pathname !== '/' && initialState?.userData?._id === post?.createdBy?._id ? (
-              <div className="relative">
-                <FiMoreVertical
-                  onClick={() =>
-                    setDropdowns({ [post._id]: !dropdowns[post._id] })
-                  }
-                  role="button"
-                  className="text-md  cursor-pointer  text-white"
-                />
-                {dropdowns[post?._id] && (
-                  <ul className="menu bg-base-200 w-56 rounded-box absolute top-6 right-0 ">
-                    <li>
-                      <p onClick={() => handleEdit(post?._id)}>Edit</p>
-                    </li>
-                    <li>
-                      <p onClick={() => handleDelete(post?._id)}>
-                        Delete
-                      </p>
-                    </li>
-                  </ul>
-                )}
-              </div>
-            ) : null}
-            { location.pathname !== '/' && initialState?.userData?._id !== post?.createdBy?._id && (
-              <button
-                onClick={() => followUser(post?.createdBy?._id)}
-                className={`rounded-full px-4 text-sm py-1  text-black border border-solid border-white ${
-                  initialState?.userData &&
-                  initialState?.userData?.following.includes(
-                    post?.createdBy?._id
-                  )
-                    ? "bg-transparent hover:bg-transparent  text-white "
-                    : "bg-white hover:bg-transparent border-transparent  hover:text-white"
-                }`}
-              >
-                {initialState?.userData &&
-                initialState?.userData?.following?.includes(
-                  post?.createdBy?._id
-                )
-                  ? "Unfollow"
-                  : "Follow"}
-              </button>
-            )}
+                  {location.pathname !== "/" &&
+                  initialState?.userData?._id === post?.createdBy?._id ? (
+                    <div className="relative">
+                      <FiMoreVertical
+                        onClick={() =>
+                          setDropdowns({ [post._id]: !dropdowns[post._id] })
+                        }
+                        role="button"
+                        className="text-md  cursor-pointer  text-white"
+                      />
+                      {dropdowns[post?._id] && (
+                        <ul className="menu bg-base-200 w-56 rounded-box absolute top-6 right-0 ">
+                          <li>
+                            <p onClick={() => handleEdit(post?._id)}>Edit</p>
+                          </li>
+                          <li>
+                            <p onClick={() => handleDelete(post?._id)}>
+                              Delete
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  ) : null}
+                  {location.pathname !== "/" &&
+                    initialState?.userData?._id !== post?.createdBy?._id && (
+                      <button
+                        onClick={() => followUser(post?.createdBy?._id)}
+                        className={`rounded-full px-4 text-sm py-1  text-black border border-solid border-white ${
+                          initialState?.userData &&
+                          initialState?.userData?.following.includes(
+                            post?.createdBy?._id
+                          )
+                            ? "bg-transparent hover:bg-transparent  text-white "
+                            : "bg-white hover:bg-transparent border-transparent  hover:text-white"
+                        }`}
+                      >
+                        {initialState?.userData &&
+                        initialState?.userData?.following?.includes(
+                          post?.createdBy?._id
+                        )
+                          ? "Unfollow"
+                          : "Follow"}
+                      </button>
+                    )}
                 </div>
               </div>
             </div>
@@ -342,14 +340,14 @@ const Twittercard = ({ post }) => {
             </div>
           </div>
           <Model
-        showModel={showModal}
-        toggleModel={toggleModal}
-        setShowModal={setShowModal}
-        postId={postId}
-      />
+            showModel={showModal}
+            toggleModel={toggleModal}
+            setShowModal={setShowModal}
+            postId={postId}
+          />
           <hr className="border-gray-800" />
         </article>
-    }
+      )}
     </>
   );
 };
