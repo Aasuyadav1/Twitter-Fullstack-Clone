@@ -11,6 +11,7 @@
       email: "",
       password: "",
     });
+    const [loading, setLoading] = useState(false);
     const { initialState, getCurrentUser, setInitialState } = useStore((state) => state);
 
     const B_URL = process.env.BACKEND_URL;
@@ -28,6 +29,7 @@
         return toast.error("All fields are required");
       }
       try {
+        setLoading(true); // Set loading to true when form is submitted
         const response = await fetch(`${B_URL}/login`, {
           method: "POST",
           headers: {
@@ -35,33 +37,39 @@
           },
           body: JSON.stringify(formData),
         });
-
+  
         const data = await response.json();
         console.log(data);
         if (response.ok) {
           toast.success(data.message);
-           localStorage.setItem("token", data.token);
-           setInitialState("token", data.token);
-          navigate("/home");
-           setInitialState("isLoggedIn", true);
-          setFormData({
-            email: "",
-            password: "",
-          });
+          await localStorage.setItem("token", data.token);
+          await setInitialState("token", data.token);
+          await getCurrentUser();
+          await setInitialState("isLoggedIn", true);
+          if (initialState?.isLoggedIn) {
+            navigate("/home");
+            setFormData({
+              email: "",
+              password: "",
+            });
+          }
         } else {
           toast.error(data.message);
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false); // Set loading to false when request completes (success or error)
       }
     };
 
     useEffect(() => {
-      getCurrentUser();
-      if(!initialState.isLoggedIn){
-        navigate("/")
-      } 
-    }, []);
+      if (initialState?.isLoggedIn) {
+        navigate("/home");
+      } else {
+        navigate("/");
+      }
+    }, [initialState?.isLoggedIn]);
     return (
       <section class=" w-screen bg-[#0c1218]">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -129,8 +137,9 @@
                 <button
                   type="submit"
                   class="w-full text-white bg-primary-600 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800"
+                  disabled={loading}
                 >
-                  Sign in
+                   {loading ? "Loading..." : "Sign in"}
                 </button>
                 <p class="text-sm font-light text-gray-400">
                   Don’t have an account yet?{" "}

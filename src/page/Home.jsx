@@ -11,11 +11,12 @@ const Home = () => {
   const { initialState, getCurrentUser } = useStore((state) => state);
   const navigate = useNavigate();
   useEffect(() => {
-    getCurrentUser();
-    if (!initialState.isLoggedIn) {
+    if (!initialState?.isLoggedIn) {
       navigate("/");
+    } else {
+      navigate("/home");
     }
-  }, []);
+  }, [initialState?.isLoggedIn]);
   return (
     <div>
       <Uploadpost />
