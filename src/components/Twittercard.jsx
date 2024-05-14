@@ -38,8 +38,8 @@ const Twittercard = ({ post, fetchPostsOnLike }) => {
 
       if (response.ok) {
         getAllPosts();
-        if(fetchPostsOnLike){
-          fetchPostsOnLike()
+        if (fetchPostsOnLike) {
+           fetchPostsOnLike(); // Call fetchPostsOnLike if it exists
         }
         toast.success(data.message);
       } else {

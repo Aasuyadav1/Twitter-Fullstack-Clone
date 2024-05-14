@@ -83,7 +83,11 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
+<<<<<<< HEAD
                   class="border  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+=======
+                  class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+>>>>>>> e890424efe5bb0fe4beb52357a5469d644e5c83a
                   placeholder="name@company.com"
                   required=""
                 />
