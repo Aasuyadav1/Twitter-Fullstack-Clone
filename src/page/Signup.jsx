@@ -6,7 +6,7 @@ import useStore from '../lib/store'
 
 const Signup = () => {
     const navigate = useNavigate()
-    const {initialState} = useStore((state)=> state)
+    const {initialState, getCurrentUser} = useStore((state)=> state)
     const B_URL = process.env.BACKEND_URL
     const [formData, setFormData] = useState({
         name : "",
@@ -42,6 +42,7 @@ const Signup = () => {
                 navigate("/home")
                 toast.success("logged in successfully")
                 localStorage.setItem("token", data.token)
+                getCurrentUser()
                 setFormData({
                     name : "",
                     username : "",
