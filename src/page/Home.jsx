@@ -13,8 +13,10 @@ const Home = () => {
   useEffect(() => {
     if(!initialState?.userData?._id){
       navigate('/login')
+    }else{
+      navigate('/home')
     }
-  },[])
+  },[initialState?.userData?._id])
   return (
    <div>
     <Uploadpost/>

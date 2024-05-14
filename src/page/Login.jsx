@@ -59,9 +59,11 @@ const Login = () => {
 
   useEffect(() => {
     if (initialState?.userData?._id) {
-      navigate("/");
+      navigate("/home");
+    }else{
+      navigate("/")
     }
-  },[])
+  },[initialState?.userData?._id])
   return (
     <section class=" w-screen bg-[#0c1218]" >
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

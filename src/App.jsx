@@ -16,12 +16,14 @@ import Navbar from './components/Navbar'
 import Layout from './Layout'
 
 function App() {
-  const {getCurrentUser} = useStore((state) => state)
+  const {getCurrentUser, initialState} = useStore((state) => state)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
     getCurrentUser()
   },[])
+
+ 
 
   return (
    <div className='bg-[#0c1218]'>
@@ -29,14 +31,14 @@ function App() {
     
     <Routes>
        <Route path="/" element={<Layout/>} >
-       <Route index path="/" element={<Home/>} />
+       <Route path="/home" element={<Home/>} />
         <Route path='/post/:id' element={<Post/>} />
         <Route path="update/profile/:id" element={<ProfileUpdate/>} />
         <Route path="/profile/:id" element={<Profile/>} />
         <Route path="user/follow/:id" element={<FollowLists/>} />
         <Route path="user/followers/:id" element={<FollowersLists/>} />
        </Route>
-       <Route path="/login" element={<Login />} />
+       <Route index  path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
        
     </Routes>

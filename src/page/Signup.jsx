@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Link } from 'react-router-dom'
+import { useStore } from '../lib/store'
 
 const Signup = () => {
     const navigate = useNavigate()
+    const {initialState} = useStore((state)=> state)
     const B_URL = process.env.BACKEND_URL
     const [formData, setFormData] = useState({
         name : "",
@@ -53,6 +55,14 @@ const Signup = () => {
             console.log(error)
         }
     }
+
+    useEffect(()=>{
+        if(!initialState?.userData?._id){
+            navigate("/home")
+        }else{
+            navigate("/")
+        }
+    },[initialState?.userData?._id])
 
   return (
     <section class=" bg-[#0c1218] w-full">

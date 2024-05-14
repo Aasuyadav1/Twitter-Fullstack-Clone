@@ -14,7 +14,7 @@ const Navbar = () => {
           style={{ width: "275px" }}
         >
           {/* Logo */}
-          <Link to={"/"}>
+          <Link to={"/home"}>
             <svg
               viewBox="0 0 24 24"
               className="h-8 w-8 text-white ml-3"
@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* Nav */}
           <nav className="mt-5 px-2">
             <Link
-              to={"/"}
+              to={"/home"}
               className="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-gray-800 hover:text-blue-300"
             >
               <svg
@@ -138,7 +138,7 @@ const Navbar = () => {
             ) : null}
             {!initialState?.userData && (
               <Link
-                to={"/login"}
+                to={"/"}
                 class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300"
               >
                 <svg

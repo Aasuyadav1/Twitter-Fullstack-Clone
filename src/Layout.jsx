@@ -18,7 +18,7 @@ const Layout = () => {
               <section className="border border-y-0 border-gray-800 md:max-w-[600px] w-full">
                 <div className="flex justify-between items-center">
                   <div className="mx-2">
-                   <Link to="/">
+                   <Link to="/home">
                    <h2 className="px-4 py-2 text-xl font-semibold text-white">Home</h2>
                    </Link>
                   </div>
