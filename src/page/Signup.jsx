@@ -41,6 +41,7 @@ const Signup = () => {
             if(response.ok){
                 toast.success("logged in successfully")
                 await localStorage.setItem("token", data.token)
+                await setInitialState("token", data.token);
                 await getCurrentUser()
                 await setInitialState("isLoggedIn", true)
                 navigate("/home")

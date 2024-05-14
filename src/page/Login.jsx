@@ -40,10 +40,9 @@
         console.log(data);
         if (response.ok) {
           toast.success(data.message);
-          localStorage.setItem("token", data.token);
-          console.log("token", data.token);
+          await localStorage.setItem("token", data.token);
+          await setInitialState("token", data.token);
           await getCurrentUser();
-          console.log("after current use", initialState.token);
           await setInitialState("isLoggedIn", true);
           navigate("/home");
           setFormData({
