@@ -26,7 +26,7 @@ const useStore = create((set, get) => ({
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${initialState.token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
