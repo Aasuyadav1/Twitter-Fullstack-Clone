@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../lib/store";
 
 const Home = () => {
-  const { initialState } = useStore((state) => state);
+  const { initialState, getCurrentUser } = useStore((state) => state);
   const navigate = useNavigate();
   useEffect(() => {
     if (!initialState?.isLoggedIn) {
       navigate("/");
     } else {
+      getCurrentUser();
       navigate("/home");
     }
   }, [initialState?.isLoggedIn]);

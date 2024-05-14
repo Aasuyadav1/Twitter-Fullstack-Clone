@@ -99,6 +99,7 @@ const Twittercard = ({ post, fetchPostsOnLike }) => {
 
       if (response.ok) {
         getAllPosts();
+        navigate("/home")
         toast.success(data.message);
       } else {
         toast.error(data.message);
