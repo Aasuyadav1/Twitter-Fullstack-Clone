@@ -38,9 +38,8 @@ function App() {
         <Route path="user/follow/:id" element={<FollowLists/>} />
         <Route path="user/followers/:id" element={<FollowersLists/>} />
        </Route>
-       <Route index  path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-       
+      <Route path="/signup" element={<Signup />} />
+          <Route index path="/" element={<Login />} />
     </Routes>
     </BrowserRouter>
    </div>
