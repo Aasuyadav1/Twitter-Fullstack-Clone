@@ -78,7 +78,7 @@ const Post = () => {
         setComments(data.comments);
 
         if (comments) {
-          console.log(comments[0].createdBy.username);
+          console.log(comments[0]?.createdBy?.username);
         }
       }
     } catch (error) {

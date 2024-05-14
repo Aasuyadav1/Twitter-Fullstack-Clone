@@ -40,7 +40,7 @@ const Signup = () => {
 
             if(response.ok){
                 navigate("/home")
-                toast.success(data.message)
+                toast.success("logged in successfully")
                 localStorage.setItem("token", data.token)
                 setFormData({
                     name : "",

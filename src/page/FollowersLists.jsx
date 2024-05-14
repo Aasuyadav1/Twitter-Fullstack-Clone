@@ -35,7 +35,7 @@ const FollowersLists = () => {
   }, [id]);
   return (
     <div className="h-screen w-full">
-      <h1 className="text-xl font-bold text-left mt-10 px-4">Followers</h1>
+      <h1 className="text-xl text-gray-200 font-bold text-left mt-10 px-4">Followers</h1>
       <div className="mt-6">
         {user &&
           user.followers.map((user) => (
