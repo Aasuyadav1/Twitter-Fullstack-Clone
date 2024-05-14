@@ -59,6 +59,7 @@ const Modal = ({ showModel, setShowModal, toggleModel, postId }) => {
         setShowModal(false);
         toggleModel();
         getAllPosts();
+        fetchPost();
         toast.success(data.message);
       }
     } catch (error) {
@@ -74,84 +75,90 @@ const Modal = ({ showModel, setShowModal, toggleModel, postId }) => {
 
   return (
     <>
-      {showModel && post && (
+      {showModel && (
         <div
           id="default-modal"
           tabIndex="-1"
           aria-hidden="true"
           className="fixed inset-0 flex items-center justify-center bg-[#192734] bg-opacity-50 overflow-y-auto"
         >
-          <div className="relative  w-full max-w-[450px] max-h-full border-solid border border-gray-600 rounded-lg">
-            <div className="relative bg-[#192734] rounded-lg shadow ">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                {/* <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Update Post
-                </h3> */}
-                <div className="flex gap-1 items-center">
-                  <img
-                    src={post?.createdBy?.avatar}
-                    className="h-[35px] rounded-full w-[35px] object-cover aspect-square"
-                    alt=""
-                  />
-                  <div className="flex flex-col leading-0">
-                    <span className="text-white text-md">
-                      {post?.createdBy?.name}
-                    </span>
-                    <span className="text-gray-400 text-sm">
-                      @{post?.createdBy?.username}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={toggleModel}
-                  type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  <svg
-                    className="w-3 h-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          {
+            post ? (
+              <div className="relative  w-full max-w-[450px] max-h-full border-solid border border-gray-600 rounded-lg">
+              <div className="relative bg-[#192734] rounded-lg shadow ">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  {/* <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Update Post
+                  </h3> */}
+                  <div className="flex gap-1 items-center">
+                    <img
+                      src={post?.createdBy?.avatar || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+                      className="h-[35px] rounded-full w-[35px] object-cover aspect-square"
+                      alt=""
                     />
-                  </svg>
-                  <span className="sr-only">Close modal</span>
-                </button>
-              </div>
-
-              <div className="p-4 md:p-5 space-y-4">
-                <textarea
-                  className="w-full outline-none bg-[#192734] rounded-lg p-2 text-white"
-                  name="content"
-                  value={formData?.content}
-                  id=""
-                  onChange={(e) =>
-                    setformData({ ...formData, content: e.target.value })
-                  }
-                ></textarea>
-                <img className="w-full " src={post?.postPhoto} alt="" />
-              </div>
-
-              <div className="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button
-                  onClick={handleSubmit}
-                  type="button"
-                  className="text-black bg-white px-4 rounded-full py-1.5 text-sm font-medium"
-                >
-                  Edit Post
-                </button>
+                    <div className="flex flex-col leading-0">
+                      <span className="text-white text-md">
+                        {post?.createdBy?.name}
+                      </span>
+                      <span className="text-gray-400 text-sm">
+                        @{post?.createdBy?.username}
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={toggleModel}
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+  
+                <div className="p-4 md:p-5 space-y-4">
+                  <textarea
+                    className="w-full outline-none bg-[#192734] rounded-lg p-2 text-white"
+                    name="content"
+                    value={formData?.content}
+                    id=""
+                    onChange={(e) =>
+                      setformData({ ...formData, content: e.target.value })
+                    }
+                  ></textarea>
+                  <img className="w-full " src={post?.postPhoto} alt="" />
+                </div>
+  
+                <div className="flex justify-end items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button
+                    onClick={handleSubmit}
+                    type="button"
+                    className="text-black bg-white px-4 rounded-full py-1.5 text-sm font-medium"
+                  >
+                    Edit Post
+                  </button>
+                </div>
               </div>
             </div>
+            ) : <div className="absolute inset-0 flex items-center justify-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
           </div>
+          }
         </div>
-      )}
+      ) } 
     </>
   );
 };

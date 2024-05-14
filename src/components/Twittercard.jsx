@@ -6,7 +6,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import Model from "./Model";
 import { useLocation } from "react-router-dom";
 
-const Twittercard = ({ post }) => {
+const Twittercard = ({ post, fetchPostsOnLike }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [dropdowns, setDropdowns] = useState({});
@@ -38,6 +38,7 @@ const Twittercard = ({ post }) => {
 
       if (response.ok) {
         getAllPosts();
+        fetchPostsOnLike();
         toast.success(data.message);
       } else {
         toast.error("Something went wrong");

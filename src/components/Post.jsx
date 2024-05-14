@@ -99,7 +99,7 @@ const Post = () => {
       {Array.isArray(posts) ? (
         posts.map((post, i) => (
           <div key={post._id}>
-            <Twittercard post={post} key={post._id} />
+            <Twittercard post={post} key={post._id} fetchPostsOnLike={getPost} />
 
             <div className="bg-transparent border-gray-800  w-full">
               <div className="mt-4 p-4 ">
