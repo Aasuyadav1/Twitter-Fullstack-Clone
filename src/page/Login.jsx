@@ -42,9 +42,10 @@
           toast.success(data.message);
           await localStorage.setItem("token", data.token);
           await setInitialState("token", data.token);
+          navigate("/home");
           await getCurrentUser();
           await setInitialState("isLoggedIn", true);
-          navigate("/home");
+          
           setFormData({
             email: "",
             password: "",
