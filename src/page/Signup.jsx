@@ -41,7 +41,7 @@ const Signup = () => {
           const data = await response.json();
     
           if (response.ok) {
-            toast.success('Signed up successfully');
+            
             await localStorage.setItem('token', data.token);
             await setInitialState('token', data.token);
             await getCurrentUser();
@@ -62,6 +62,8 @@ const Signup = () => {
           console.log(error);
         } finally {
           setLoading(false); 
+          toast.success('Signed up successfully');
+
         }
       };
 

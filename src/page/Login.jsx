@@ -41,7 +41,6 @@
         const data = await response.json();
         console.log(data);
         if (response.ok) {
-          toast.success(data.message);
           await localStorage.setItem("token", data.token);
           await setInitialState("token", data.token);
           await getCurrentUser();
@@ -59,7 +58,8 @@
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(false); // Set loading to false when request completes (success or error)
+        toast.success("Logged in successfully");
+        setLoading(false); 
       }
     };
 
