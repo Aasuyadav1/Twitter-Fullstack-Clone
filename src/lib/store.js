@@ -20,6 +20,7 @@ const useStore = create((set, get) => ({
   getCurrentUser: async () => {
     const { initialState } = get();
     const { setInitialState } = get();
+    console.log(initialState.token);
     try {
       const response = await fetch(`${process.env.BACKEND_URL}/user`, {
         method: "GET",
