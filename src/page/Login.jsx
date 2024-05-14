@@ -39,9 +39,8 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
       if (response.ok) {
-        navigate("/");
+        navigate("/home");
         toast.success(data.message);
-        console.log(data);
         localStorage.setItem("token", data.token);
 
         setFormData({

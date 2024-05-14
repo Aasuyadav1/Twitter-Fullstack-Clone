@@ -35,7 +35,7 @@ const ProfileCard = ({ user, fetchUser }) => {
 
   useEffect(() => {
     fetchUser();
-  }, [id]);
+  }, []);
   return (
     <div>
       <div

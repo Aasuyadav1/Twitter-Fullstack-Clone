@@ -3,17 +3,12 @@ import { toast } from "sonner";
 import useStore from "../lib/store";
 import { useNavigate } from "react-router-dom";
 import { FiMoreVertical } from "react-icons/fi";
-import { useParams } from "react-router-dom";
 import Model from "./Model";
 import { useLocation } from "react-router-dom";
 
 const Twittercard = ({ post }) => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [user, setUser] = useState(null);
-  const [userPost, setUserPost] = useState([]);
   const [dropdowns, setDropdowns] = useState({});
   const [postId, setPostId] = useState(null);
 
@@ -77,47 +72,6 @@ const Twittercard = ({ post }) => {
     }
   };
 
-  const fetchUser = async () => {
-    try {
-      const response = await fetch(`${B_URL}/user/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setUser(data.user);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
-
-  const fetchUserPosts = async () => {
-    try {
-      const response = await fetch(`${B_URL}/post/user/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setUserPost(data.posts);
-      } else {
-        console.log("error on fetching user posts");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -142,7 +96,6 @@ const Twittercard = ({ post }) => {
       });
 
       if (response.ok) {
-        fetchUserPosts();
         getAllPosts();
         toast.success(data.message);
       } else {
@@ -158,26 +111,6 @@ const Twittercard = ({ post }) => {
       setDropdowns({}); // Close the clicked dropdown
     }
   }, [showModal]);
-
-  useEffect(() => {
-    fetchUserPosts();
-  }, [toggleModal]);
-
-  useEffect(() => {
-    fetchUser();
-    fetchUserPosts();
-  }, []);
-
-  useEffect(() => {
-    console.log("path", location.pathname);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    getAllPosts();
-    initialState.allPosts
-      ? console.log(initialState.allPosts)
-      : console.log("no posts");
-  }, []);
 
   return (
     <>
@@ -210,7 +143,7 @@ const Twittercard = ({ post }) => {
                       {formatedDate(post?.createdAt)}
                     </span>
                   </p>
-                  {location.pathname !== "/" &&
+                  {location.pathname !== "/home" &&
                   initialState?.userData?._id === post?.createdBy?._id ? (
                     <div className="relative">
                       <FiMoreVertical
@@ -234,7 +167,7 @@ const Twittercard = ({ post }) => {
                       )}
                     </div>
                   ) : null}
-                  {location.pathname !== "/" &&
+                  {location.pathname !== "/home" &&
                     initialState?.userData?._id !== post?.createdBy?._id && (
                       <button
                         onClick={() => followUser(post?.createdBy?._id)}
@@ -307,7 +240,7 @@ const Twittercard = ({ post }) => {
                 14 k
               </div>
               <div
-                onClick={() => likePost(post._id)}
+                onClick={() => likePost(post?._id)}
                 className={`flex-1 flex items-center ${
                   post && post?.Likes?.includes(initialState?.userid)
                     ? "text-red-500"

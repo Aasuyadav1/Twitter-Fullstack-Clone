@@ -44,29 +44,6 @@ const Profile = () => {
     }
   };
 
-  const followUser = async (id) => {
-    try {
-      const response = await fetch(`${B_URL}/follow/user/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${initialState.token}`,
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        fetchUserPosts();
-        fetchUser();
-        setInitialState("userData", data.user);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const fetchUserPosts = async () => {
     try {
       const response = await fetch(`${B_URL}/post/user/${id}`, {
@@ -100,12 +77,15 @@ const Profile = () => {
 
   useEffect(() => {
     fetchUserPosts();
-  }, [toggleModal]);
+  }, [showModal]);
 
   useEffect(() => {
     fetchUser();
+  }, [id]);
+
+  useEffect(() => {
     fetchUserPosts();
-  }, []);
+  },[id])
 
   return (
     <div className=" flex items-center mt-4 justify-center ">

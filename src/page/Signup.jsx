@@ -39,7 +39,7 @@ const Signup = () => {
             const data = await response.json();
 
             if(response.ok){
-                navigate("/")
+                navigate("/home")
                 toast.success(data.message)
                 localStorage.setItem("token", data.token)
                 setFormData({
@@ -57,9 +57,7 @@ const Signup = () => {
     }
 
     useEffect(()=>{
-        if(!initialState?.userData?._id){
-            navigate("/")
-        }else{
+        if(initialState?.userData?._id){
             navigate("/home")
         }
     },[initialState?.userData?._id])
