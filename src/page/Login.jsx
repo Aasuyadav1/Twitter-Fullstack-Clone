@@ -42,7 +42,7 @@ const Login = () => {
         navigate("/home");
         toast.success(data.message);
         localStorage.setItem("token", data.token);
-        getCurrentUser();
+        await getCurrentUser();
         setFormData({
           email: "",
           password: "",

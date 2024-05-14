@@ -42,7 +42,7 @@ const Signup = () => {
                 navigate("/home")
                 toast.success("logged in successfully")
                 localStorage.setItem("token", data.token)
-                getCurrentUser()
+                await getCurrentUser()
                 setFormData({
                     name : "",
                     username : "",
