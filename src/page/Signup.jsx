@@ -40,12 +40,11 @@ const Signup = () => {
 
             if(response.ok){
                 toast.success("logged in successfully")
-                await localStorage.setItem("token", data.token)
-                await setInitialState("token", data.token);
+                 localStorage.setItem("token", data.token)
+                 setInitialState("token", data.token);
                 navigate("/home")
-                await getCurrentUser()
-                await setInitialState("isLoggedIn", true)
-                navigate("/home")
+                 setInitialState("isLoggedIn", true)
+               
                 setFormData({
                     name : "",
                     username : "",
@@ -60,11 +59,12 @@ const Signup = () => {
         }
     }
 
-    useEffect(()=>{
-        if(initialState?.isLoggedIn) {
-            navigate("/home")
-        }
-    },[initialState?.isLoggedIn])
+    useEffect(() => {
+        getCurrentUser();
+        if(initialState.isLoggedIn){
+          navigate("/home")
+        } 
+      }, []);
 
   return (
     <section class=" bg-[#0c1218] w-full">
