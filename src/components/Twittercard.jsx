@@ -88,6 +88,7 @@ const Twittercard = ({ post, fetchPostsOnLike }) => {
     const deleteconfirm = confirm("Are you sure? You want to delete this post");
     console.log(deleteconfirm);
     if (deleteconfirm) {
+      navigate("/home")
       console.log(id);
       const response = fetch(`${B_URL}/delete/post/${id}`, {
         method: "DELETE",
