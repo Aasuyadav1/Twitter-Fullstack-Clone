@@ -11,7 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { initialState, getCurrentUser } = useStore((state) => state);
+  const { initialState, getCurrentUser, setInitialState } = useStore((state) => state);
 
   const B_URL = process.env.BACKEND_URL;
 
@@ -40,7 +40,8 @@ const Login = () => {
       console.log(data);
       if (response.ok) {
         toast.success(data.message);
-        localStorage.setItem("token", data.token);
+        await localStorage.setItem("token", data.token);
+        await setInitialState("token", data.token);
         await getCurrentUser();
         navigate("/home");
         setFormData({
@@ -56,12 +57,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (initialState?.userData?._id) {
+    if (initialState?.token) {
       navigate("/home");
     } else {
       navigate("/");
     }
-  }, [initialState?.userData?._id]);
+  }, [initialState?.token]);
   return (
     <section class=" w-screen bg-[#0c1218]">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

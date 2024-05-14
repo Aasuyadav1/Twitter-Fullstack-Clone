@@ -6,7 +6,7 @@ import useStore from '../lib/store'
 
 const Signup = () => {
     const navigate = useNavigate()
-    const {initialState, getCurrentUser} = useStore((state)=> state)
+    const {initialState, getCurrentUser,setInitialState} = useStore((state)=> state)
     const B_URL = process.env.BACKEND_URL
     const [formData, setFormData] = useState({
         name : "",
@@ -40,7 +40,8 @@ const Signup = () => {
 
             if(response.ok){
                 toast.success("logged in successfully")
-                localStorage.setItem("token", data.token)
+                await localStorage.setItem("token", data.token)
+                await setInitialState("token", data.token)
                 await getCurrentUser()
                 navigate("/home")
                 setFormData({
@@ -58,10 +59,10 @@ const Signup = () => {
     }
 
     useEffect(()=>{
-        if(initialState?.userData?._id){
+        if(initialState?.token) {
             navigate("/home")
         }
-    },[initialState?.userData?._id])
+    },[initialState?.token])
 
   return (
     <section class=" bg-[#0c1218] w-full">
