@@ -39,14 +39,7 @@ const useStore = create((set, get) => ({
         setInitialState("userid", data.user._id);
         setInitialState("userData", data.user);
         console.log("after setting userData", initialState);
-        //
       } else {
-        // setInitialState("isLoggedIn", false)
-        // setInitialState("username", null)
-        // setInitialState("email", null)
-        // setInitialState("userid", null)
-        // setInitialState("token", null)
-        // setInitialState("userData", null)
         console.log("user fatching failed");
         toast.error("Something went wrong");
       }
