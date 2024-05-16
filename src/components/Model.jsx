@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../lib/store";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Modal = ({ showModel, setShowModal, toggleModel, postId }) => {
+  
   const { initialState, setInitialState, getAllPosts } = useStore(
     (state) => state
   );
+  
   const [formData, setformData] = useState({
     content: "",
   });
 
+  const navigate = useNavigate();
+  
   const B_URL = process.env.BACKEND_URL;
 
   const [post, setPost] = useState([]);
@@ -57,6 +62,7 @@ const Modal = ({ showModel, setShowModal, toggleModel, postId }) => {
 
       if (response.ok) {
         setShowModal(false);
+        navigate("/home")
         toggleModel();
         getAllPosts();
         fetchPost();
