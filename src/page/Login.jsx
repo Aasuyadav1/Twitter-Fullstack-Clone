@@ -58,7 +58,7 @@
       } catch (error) {
         console.log(error);
       } finally {
-        toast.success("Logged in successfully");
+       
         setLoading(false); 
       }
     };
