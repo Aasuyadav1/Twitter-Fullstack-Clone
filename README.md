@@ -1,8 +1,22 @@
-# React + Vite
+# Twitter Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Twitter Clone](https://via.placeholder.com/800x400)  <!-- Replace with actual image URL -->
 
-Currently, two official plugins are available:
+This project is a Twitter clone integrated with my Twitter API. It includes authentication, post upload with CRUD operations, and comments and likes functionality.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deployment
+
+The Twitter Clone is deployed at [Deployment URL](https://res.cloudinary.com/driaaeuhp/image/upload/v1719768987/myPortfolio/private/rll5lo2lidxbnl1wdv2f.png).
+
+## API Repository
+
+Find the Twitter API repository [here](https://github.com/Aasuyadav1/Twitter-API).
+
+## Technologies Used
+
+- **Node.js**
+- **Express.js**
+- **MongoDB**
+- **JWT (JSON Web Tokens)**
+- **React.js**
+
