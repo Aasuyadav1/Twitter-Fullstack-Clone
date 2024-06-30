@@ -1,12 +1,12 @@
 # Twitter Clone
 
-![Twitter Clone](https://via.placeholder.com/800x400)  <!-- Replace with actual image URL -->
+![Twitter Clone](https://res.cloudinary.com/driaaeuhp/image/upload/v1719768987/myPortfolio/private/rll5lo2lidxbnl1wdv2f.png)  <!-- Replace with actual image URL -->
 
 This project is a Twitter clone integrated with my Twitter API. It includes authentication, post upload with CRUD operations, and comments and likes functionality.
 
 ## Deployment
 
-The Twitter Clone is deployed at [Deployment URL](https://res.cloudinary.com/driaaeuhp/image/upload/v1719768987/myPortfolio/private/rll5lo2lidxbnl1wdv2f.png).
+The Twitter Clone is deployed at [Twitter](https://twitter-mern-clone.vercel.app/).
 
 ## API Repository
 
